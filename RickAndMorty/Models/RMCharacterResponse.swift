@@ -9,7 +9,7 @@ import Foundation
 
 struct RMCharacterResponse: Codable {
     let info: Info
-    let results: RMCharacterResult
+    let results: [RMCharacterResult]
 }
 
 struct Info: Codable {
@@ -18,17 +18,15 @@ struct Info: Codable {
 }
 
 struct RMCharacterResult: Codable, Identifiable {
-    let id: Int
-    let name: String
-    let status: String
-    let species: String
-    let type: String
-    let gender: String
-    let orign: Orign
-    let location: Location
-    let image: String
-    let episode: [String]
-    let created: String
+    let id: Int?
+    let name, status, species, type: String?
+    let gender: String?
+    let orign: Orign?
+    let location: Location?
+    let image: String?
+    let episode: [String]?
+    let url: String?
+    let created: String?
 }
 
 struct Orign: Codable {

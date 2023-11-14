@@ -14,6 +14,8 @@
 		C9B8561F2B03E08C00E15D91 /* CharactersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B8561E2B03E08C00E15D91 /* CharactersVC.swift */; };
 		C9B856222B03E0EB00E15D91 /* RMTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B856212B03E0EB00E15D91 /* RMTabBarController.swift */; };
 		C9B856252B03E6B800E15D91 /* RMCharacterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B856242B03E6B800E15D91 /* RMCharacterResponse.swift */; };
+		C9B856282B03E9E000E15D91 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B856272B03E9E000E15D91 /* NetworkManager.swift */; };
+		C9B8562D2B03F59500E15D91 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B8562C2B03F59500E15D91 /* CharacterViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		C9B8561E2B03E08C00E15D91 /* CharactersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersVC.swift; sourceTree = "<group>"; };
 		C9B856212B03E0EB00E15D91 /* RMTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMTabBarController.swift; sourceTree = "<group>"; };
 		C9B856242B03E6B800E15D91 /* RMCharacterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterResponse.swift; sourceTree = "<group>"; };
+		C9B856272B03E9E000E15D91 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		C9B8562C2B03F59500E15D91 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,7 @@
 			children = (
 				C9B856082B03DF5800E15D91 /* AppDelegate.swift */,
 				C9B8560A2B03DF5800E15D91 /* SceneDelegate.swift */,
+				C9B856262B03E9DA00E15D91 /* Networking */,
 				C9B856232B03E1BA00E15D91 /* Models */,
 				C9B8561C2B03E04300E15D91 /* Core */,
 				C9B856112B03DF5A00E15D91 /* Assets.xcassets */,
@@ -82,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				C9B8561E2B03E08C00E15D91 /* CharactersVC.swift */,
+				C9B8562C2B03F59500E15D91 /* CharacterViewModel.swift */,
 			);
 			path = CharactersVC;
 			sourceTree = "<group>";
@@ -100,6 +106,14 @@
 				C9B856242B03E6B800E15D91 /* RMCharacterResponse.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C9B856262B03E9DA00E15D91 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				C9B856272B03E9E000E15D91 /* NetworkManager.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,8 +186,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9B856282B03E9E000E15D91 /* NetworkManager.swift in Sources */,
 				C9B856092B03DF5800E15D91 /* AppDelegate.swift in Sources */,
 				C9B856222B03E0EB00E15D91 /* RMTabBarController.swift in Sources */,
+				C9B8562D2B03F59500E15D91 /* CharacterViewModel.swift in Sources */,
 				C9B856252B03E6B800E15D91 /* RMCharacterResponse.swift in Sources */,
 				C9B8561F2B03E08C00E15D91 /* CharactersVC.swift in Sources */,
 				C9B8560B2B03DF5800E15D91 /* SceneDelegate.swift in Sources */,
