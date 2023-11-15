@@ -6,6 +6,8 @@
 //
 //
 
+// TODO: Pagination, Detail View delegation
+
 import UIKit
 
 final class CharactersVC: UIViewController {
@@ -38,7 +40,6 @@ final class CharactersVC: UIViewController {
         view.addSubview(collectionView)
 
         collectionView.register(CharacterCell.self, forCellWithReuseIdentifier: CharacterCell.reuseId)
-        
         collectionView.dataSource = self
     }
      

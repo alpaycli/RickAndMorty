@@ -11,13 +11,16 @@
 		C92287F22B04A2BA003772BB /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92287F12B04A2BA003772BB /* CharacterCell.swift */; };
 		C92287F52B053BA5003772BB /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = C92287F42B053BA5003772BB /* SDWebImage */; };
 		C92287F72B053BA5003772BB /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C92287F62B053BA5003772BB /* SDWebImageMapKit */; };
+		C92287FB2B054E93003772BB /* LocationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92287FA2B054E93003772BB /* LocationsVC.swift */; };
+		C92287FD2B054F40003772BB /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92287FC2B054F40003772BB /* LocationCell.swift */; };
+		C92287FF2B055082003772BB /* RMLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92287FE2B055082003772BB /* RMLocation.swift */; };
 		C9B856092B03DF5800E15D91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B856082B03DF5800E15D91 /* AppDelegate.swift */; };
 		C9B8560B2B03DF5800E15D91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B8560A2B03DF5800E15D91 /* SceneDelegate.swift */; };
 		C9B856122B03DF5A00E15D91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9B856112B03DF5A00E15D91 /* Assets.xcassets */; };
 		C9B856152B03DF5A00E15D91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9B856132B03DF5A00E15D91 /* LaunchScreen.storyboard */; };
 		C9B8561F2B03E08C00E15D91 /* CharactersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B8561E2B03E08C00E15D91 /* CharactersVC.swift */; };
 		C9B856222B03E0EB00E15D91 /* RMTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B856212B03E0EB00E15D91 /* RMTabBarController.swift */; };
-		C9B856252B03E6B800E15D91 /* RMCharacterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B856242B03E6B800E15D91 /* RMCharacterResponse.swift */; };
+		C9B856252B03E6B800E15D91 /* RMCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B856242B03E6B800E15D91 /* RMCharacter.swift */; };
 		C9B856282B03E9E000E15D91 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B856272B03E9E000E15D91 /* NetworkManager.swift */; };
 		C9B8562D2B03F59500E15D91 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B8562C2B03F59500E15D91 /* CharacterViewModel.swift */; };
 		C9B856342B03FD1C00E15D91 /* GFTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B856332B03FD1B00E15D91 /* GFTitleLabel.swift */; };
@@ -34,6 +37,9 @@
 /* Begin PBXFileReference section */
 		C92287EF2B04A295003772BB /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		C92287F12B04A2BA003772BB /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
+		C92287FA2B054E93003772BB /* LocationsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationsVC.swift; path = RickAndMorty/Core/LocationsVC.swift; sourceTree = SOURCE_ROOT; };
+		C92287FC2B054F40003772BB /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
+		C92287FE2B055082003772BB /* RMLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMLocation.swift; sourceTree = "<group>"; };
 		C9B856052B03DF5800E15D91 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9B856082B03DF5800E15D91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9B8560A2B03DF5800E15D91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,7 +48,7 @@
 		C9B856162B03DF5A00E15D91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9B8561E2B03E08C00E15D91 /* CharactersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersVC.swift; sourceTree = "<group>"; };
 		C9B856212B03E0EB00E15D91 /* RMTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMTabBarController.swift; sourceTree = "<group>"; };
-		C9B856242B03E6B800E15D91 /* RMCharacterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterResponse.swift; sourceTree = "<group>"; };
+		C9B856242B03E6B800E15D91 /* RMCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacter.swift; sourceTree = "<group>"; };
 		C9B856272B03E9E000E15D91 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C9B8562C2B03F59500E15D91 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
 		C9B856332B03FD1B00E15D91 /* GFTitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GFTitleLabel.swift; sourceTree = "<group>"; };
@@ -69,6 +75,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C92287F82B054E53003772BB /* LocationsVC */ = {
+			isa = PBXGroup;
+			children = (
+				C92287FA2B054E93003772BB /* LocationsVC.swift */,
+			);
+			path = LocationsVC;
+			sourceTree = "<group>";
+		};
 		C9B855FC2B03DF5800E15D91 = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +119,7 @@
 		C9B8561C2B03E04300E15D91 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				C92287F82B054E53003772BB /* LocationsVC */,
 				C9B856202B03E09C00E15D91 /* TabBarVC */,
 				C9B8561D2B03E04800E15D91 /* CharactersVC */,
 			);
@@ -131,7 +146,8 @@
 		C9B856232B03E1BA00E15D91 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C9B856242B03E6B800E15D91 /* RMCharacterResponse.swift */,
+				C9B856242B03E6B800E15D91 /* RMCharacter.swift */,
+				C92287FE2B055082003772BB /* RMLocation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -167,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				C92287F12B04A2BA003772BB /* CharacterCell.swift */,
+				C92287FC2B054F40003772BB /* LocationCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -292,13 +309,16 @@
 				C92287F22B04A2BA003772BB /* CharacterCell.swift in Sources */,
 				C9B856462B03FF8A00E15D91 /* UIViewController+Ext.swift in Sources */,
 				C9B856442B03FF8A00E15D91 /* Date+Ext.swift in Sources */,
+				C92287FD2B054F40003772BB /* LocationCell.swift in Sources */,
 				C9B8563B2B03FD4200E15D91 /* GFAvatarImageView.swift in Sources */,
 				C9B856222B03E0EB00E15D91 /* RMTabBarController.swift in Sources */,
 				C9B8562D2B03F59500E15D91 /* CharacterViewModel.swift in Sources */,
+				C92287FF2B055082003772BB /* RMLocation.swift in Sources */,
 				C9B856362B03FD2200E15D91 /* GFBodyLabel.swift in Sources */,
 				C9B856452B03FF8A00E15D91 /* Array+Ext.swift in Sources */,
 				C9B856342B03FD1C00E15D91 /* GFTitleLabel.swift in Sources */,
-				C9B856252B03E6B800E15D91 /* RMCharacterResponse.swift in Sources */,
+				C9B856252B03E6B800E15D91 /* RMCharacter.swift in Sources */,
+				C92287FB2B054E93003772BB /* LocationsVC.swift in Sources */,
 				C92287F02B04A296003772BB /* UIHelper.swift in Sources */,
 				C9B8561F2B03E08C00E15D91 /* CharactersVC.swift in Sources */,
 				C9B8560B2B03DF5800E15D91 /* SceneDelegate.swift in Sources */,

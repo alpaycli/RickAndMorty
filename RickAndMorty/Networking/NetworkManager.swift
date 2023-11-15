@@ -52,7 +52,7 @@ enum APIError: Error, CustomStringConvertible {
     case unknown
     
     var localizedDescription: String {
-        // for user
+        // for client
         switch self {
         case .badURL, .parsing, .unknown:
             return "Something went wrong"

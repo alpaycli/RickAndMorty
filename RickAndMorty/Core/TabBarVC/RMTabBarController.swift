@@ -9,15 +9,15 @@ import UIKit
 
 class RMTabBarController: UITabBarController {
 
+    private let manager = NetworkManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         UITabBar.appearance().tintColor = .systemGreen
-        viewControllers = [createCharactersVC()]
+        viewControllers = [createCharactersVC(), createLocationsVC()]
     }
-    
 
     func createCharactersVC() -> UINavigationController {
-        let manager = NetworkManager()
         let viewModel = CharactersViewModel(manager: manager)
         
         let charactersVC = CharactersVC(viewModel: viewModel)
@@ -27,4 +27,11 @@ class RMTabBarController: UITabBarController {
         return UINavigationController(rootViewController: charactersVC)
     }
 
+    func createLocationsVC() -> UINavigationController {
+        let locationsVC = LocationsVC(manager: manager)
+        locationsVC.title = "Locations"
+        locationsVC.tabBarItem = UITabBarItem(title: "Locations", image: .init(systemName: "mappin"), tag: 0)
+        
+        return UINavigationController(rootViewController: locationsVC)
+    }
 }

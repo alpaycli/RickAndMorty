@@ -8,13 +8,7 @@
 import Foundation
 
 struct RMCharacterResponse: Codable {
-    let info: Info
     let results: [RMCharacter]
-}
-
-struct Info: Codable {
-    let next: String?
-    let prev: String?
 }
 
 struct RMCharacter: Codable, Identifiable {
@@ -27,16 +21,16 @@ struct RMCharacter: Codable, Identifiable {
     let episode: [String]?
     let url: String?
     let created: String?
-}
+    
+    struct Orign: Codable {
+        let name: String
+        let url: String
+    }
 
-struct Orign: Codable {
-    let name: String
-    let url: String
-}
-
-struct Location: Codable {
-    let name: String
-    let url: String
+    struct Location: Codable {
+        let name: String
+        let url: String
+    }
 }
 
 /*

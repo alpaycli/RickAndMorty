@@ -24,7 +24,6 @@ final class CharactersViewModel {
     
     func getAllCharacters(page: Int) {
         guard let url = URL(string: manager.baseURL + "character/?page=\(page)") else { return }
-                
         let request = URLRequest(url: url)
         
         manager.fetch(RMCharacterResponse.self, urlRequest: request) { result in
@@ -46,7 +45,7 @@ final class CharactersViewModel {
     
     func confiugreCell(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCell.reuseId, for: indexPath) as! CharacterCell
-        let character = characters[indexPath.row]
+        let character = characters[indexPath.item]
         cell.set(character: character)
         
         return cell
