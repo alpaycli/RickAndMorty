@@ -9,12 +9,14 @@ import UIKit
 
 class CharacterCell: UICollectionViewCell {
     static let reuseId = "CharacterCell"
-    let avatarImage = GFAvatarImageView(frame: .zero)
-    let titleLabel = GFTitleLabel(textAlignment: .center, fontSize: 16)
-    let secondTitleLabel = GFSecondaryTitleLabel(fontSize: 14)
+    private let avatarImage = GFAvatarImageView(frame: .zero)
+    private let titleLabel = GFTitleLabel(textAlignment: .left, fontSize: 16)
+    private let secondTitleLabel = GFSecondaryTitleLabel(fontSize: 14)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        layer.borderWidth = 0.5
+        layer.borderColor = UIColor.systemRed.cgColor
         configureImageAndTitle()
     }
     
@@ -30,7 +32,6 @@ class CharacterCell: UICollectionViewCell {
         secondTitleLabel.text = character.status
     }
     
-    
     private func configureImageAndTitle() {
         addSubviews(avatarImage, titleLabel, secondTitleLabel)
                 
@@ -44,8 +45,8 @@ class CharacterCell: UICollectionViewCell {
             avatarImage.heightAnchor.constraint(equalTo: avatarImage.widthAnchor),
             
             titleLabel.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 12),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            titleLabel.leadingAnchor.constraint(equalTo: avatarImage.leadingAnchor, constant: padding),
+            titleLabel.trailingAnchor.constraint(equalTo: avatarImage.trailingAnchor),
             titleLabel.heightAnchor.constraint(equalToConstant: 20),
             
             secondTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: padding),

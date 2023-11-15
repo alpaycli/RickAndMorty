@@ -17,7 +17,9 @@ class RMTabBarController: UITabBarController {
     
 
     func createCharactersVC() -> UINavigationController {
-        let viewModel = CharactersViewModel()
+        let manager = NetworkManager()
+        let viewModel = CharactersViewModel(manager: manager)
+        
         let charactersVC = CharactersVC(viewModel: viewModel)
         charactersVC.title = "Characters"
         charactersVC.tabBarItem = UITabBarItem(title: "Characters", image: .init(systemName: "person.2"), tag: 0)

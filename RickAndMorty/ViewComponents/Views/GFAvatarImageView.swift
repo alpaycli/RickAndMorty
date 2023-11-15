@@ -5,6 +5,7 @@
 //  Created by Alpay Calalli on 08.08.23.
 //
 
+import SDWebImage
 import UIKit
 
 class GFAvatarImageView: UIImageView {
@@ -27,8 +28,9 @@ class GFAvatarImageView: UIImageView {
         translatesAutoresizingMaskIntoConstraints = false
     }
         
-    func downloadImage(fromURL url: String) {
-        
+    func downloadImage(fromURL urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        sd_setImage(with: url, placeholderImage:placeholderImage)
     }
     
 }

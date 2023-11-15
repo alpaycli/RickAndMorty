@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C92287F02B04A296003772BB /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92287EF2B04A295003772BB /* UIHelper.swift */; };
 		C92287F22B04A2BA003772BB /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92287F12B04A2BA003772BB /* CharacterCell.swift */; };
+		C92287F52B053BA5003772BB /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = C92287F42B053BA5003772BB /* SDWebImage */; };
+		C92287F72B053BA5003772BB /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C92287F62B053BA5003772BB /* SDWebImageMapKit */; };
 		C9B856092B03DF5800E15D91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B856082B03DF5800E15D91 /* AppDelegate.swift */; };
 		C9B8560B2B03DF5800E15D91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B8560A2B03DF5800E15D91 /* SceneDelegate.swift */; };
 		C9B856122B03DF5A00E15D91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9B856112B03DF5A00E15D91 /* Assets.xcassets */; };
@@ -59,6 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C92287F72B053BA5003772BB /* SDWebImageMapKit in Frameworks */,
+				C92287F52B053BA5003772BB /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +225,10 @@
 			dependencies = (
 			);
 			name = RickAndMorty;
+			packageProductDependencies = (
+				C92287F42B053BA5003772BB /* SDWebImage */,
+				C92287F62B053BA5003772BB /* SDWebImageMapKit */,
+			);
 			productName = RickAndMorty;
 			productReference = C9B856052B03DF5800E15D91 /* RickAndMorty.app */;
 			productType = "com.apple.product-type.application";
@@ -249,6 +257,9 @@
 				Base,
 			);
 			mainGroup = C9B855FC2B03DF5800E15D91;
+			packageReferences = (
+				C92287F32B053BA5003772BB /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = C9B856062B03DF5800E15D91 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -362,7 +373,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -419,7 +430,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -507,6 +518,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C92287F32B053BA5003772BB /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.18.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C92287F42B053BA5003772BB /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C92287F32B053BA5003772BB /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		C92287F62B053BA5003772BB /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C92287F32B053BA5003772BB /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C9B855FD2B03DF5800E15D91 /* Project object */;
 }

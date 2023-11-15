@@ -8,10 +8,7 @@
 import Foundation
 
 class NetworkManager {
-    static let shared = NetworkManager()
     let baseURL: String = "https://rickandmortyapi.com/api/"
-    
-    private init() { }
 }
 
 extension NetworkManager {
