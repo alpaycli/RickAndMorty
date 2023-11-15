@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CharactersVC: UIViewController {
+final class CharactersVC: UICollectionViewController {
     
     private var page: Int = 1
     
@@ -24,6 +24,16 @@ final class CharactersVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViewController()
     //    viewModel.getAllCharacters(page: page)
+    }
+    
+    private func configureCollectionView() {
+        
+    }
+    
+    private func setupViewController() {
+        view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
 }

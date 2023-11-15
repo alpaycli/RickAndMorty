@@ -9,7 +9,7 @@ import Foundation
 
 struct RMCharacterResponse: Codable {
     let info: Info
-    let results: [RMCharacterResult]
+    let results: [RMCharacter]
 }
 
 struct Info: Codable {
@@ -17,7 +17,7 @@ struct Info: Codable {
     let prev: String?
 }
 
-struct RMCharacterResult: Codable, Identifiable {
+struct RMCharacter: Codable, Identifiable {
     let id: Int?
     let name, status, species, type: String?
     let gender: String?
