@@ -1,18 +1,18 @@
 //
-//  LocationCell.swift
+//  EpisodeCell.swift
 //  RickAndMorty
 //
-//  Created by Alpay Calalli on 15.11.23.
+//  Created by Alpay Calalli on 16.11.23.
 //
 
 import UIKit
 
-final class LocationCell: UITableViewCell {
+final class EpisodeCell: UITableViewCell {
 
-    static let reuseId = "LocationCell"
+    static let reuseId = "EpisodeCell"
     
-    private let titleLabel = GFTitleLabel(textAlignment: .left, fontSize: 26)
-    private let secondaryTitleLabel = GFSecondaryTitleLabel(fontSize: 24)
+    private let titleLabel = GFTitleLabel(textAlignment: .left, fontSize: 24)
+    private let secondaryTitleLabel = GFSecondaryTitleLabel(fontSize: 22)
     private let bodyLabel = GFBodyLabel(textAlignment: .left)
     
     
@@ -25,12 +25,13 @@ final class LocationCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(location: RMLocation) {
-        titleLabel.text = location.name
-        secondaryTitleLabel.text = location.type
-        if let residents = location.residents {
-            bodyLabel.text = "\(residents.count) Residents"
-        }
+    func set(episode: RMEpisode) {
+        titleLabel.text = "Episode " + (episode.episode ?? "N/A")
+        secondaryTitleLabel.text = episode.name
+//        if let airDate = episode.airDate {
+//            bodyLabel.text = "Aired on " + airDate
+//        }
+        bodyLabel.text = episode.airDate
     }
     
     private func configure() {
@@ -44,12 +45,12 @@ final class LocationCell: UITableViewCell {
             titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: padding),
             titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
             titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding),
-            titleLabel.heightAnchor.constraint(equalToConstant: 20),
+            titleLabel.heightAnchor.constraint(equalToConstant: 25),
             
             secondaryTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: padding),
             secondaryTitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             secondaryTitleLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            secondaryTitleLabel.heightAnchor.constraint(equalToConstant: 20),
+            secondaryTitleLabel.heightAnchor.constraint(equalToConstant: 25),
             
             bodyLabel.topAnchor.constraint(equalTo: secondaryTitleLabel.bottomAnchor, constant: padding),
             bodyLabel.leadingAnchor.constraint(equalTo: secondaryTitleLabel.leadingAnchor),

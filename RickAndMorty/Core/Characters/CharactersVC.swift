@@ -57,7 +57,11 @@ extension CharactersVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        viewModel.confiugreCell(collectionView, cellForItemAt: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCell.reuseId, for: indexPath) as! CharacterCell
+        let character = viewModel.characters[indexPath.row]
+        cell.set(character: character)
+        
+        return cell
     }
 }
 

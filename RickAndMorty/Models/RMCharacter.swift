@@ -13,23 +13,17 @@ struct RMCharacterResponse: Codable {
 
 struct RMCharacter: Codable, Identifiable {
     let id: Int?
-    let name, status, species, type: String?
-    let gender: String?
+    let name, status, species, type, gender, image, url, created: String?
     let orign: Orign?
     let location: Location?
-    let image: String?
     let episode: [String]?
-    let url: String?
-    let created: String?
     
     struct Orign: Codable {
-        let name: String
-        let url: String
+        let name, url: String
     }
 
     struct Location: Codable {
-        let name: String
-        let url: String
+        let name, url: String
     }
 }
 

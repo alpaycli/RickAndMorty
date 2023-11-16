@@ -1,16 +1,16 @@
 //
-//  LocationsVC.swift
+//  EpisodesVC.swift
 //  RickAndMorty
 //
-//  Created by Alpay Calalli on 15.11.23.
+//  Created by Alpay Calalli on 16.11.23.
 //
 
 import UIKit
 
-final class LocationsVC: UIViewController {
+final class EpisodesVC: UIViewController {
     
     private var page = 1
-    private var locations: [RMLocation] = []
+    private var episodes: [RMEpisode] = []
     
     private let tableView = UITableView()
     
@@ -33,17 +33,17 @@ final class LocationsVC: UIViewController {
     }
     
     func getAllCharacters(page: Int) {
-        guard let url = URL(string: manager.baseURL + "location/?page=\(page)") else { return }
+        guard let url = URL(string: manager.baseURL + "episode/?page=\(page)") else { return }
         let request = URLRequest(url: url)
         
-        manager.fetch(RMLocationResponse.self, urlRequest: request) { result in
+        manager.fetch(RMEpisodeResponse.self, urlRequest: request) { result in
             
             switch result {
             case .success(let response):
                 print(response.results.count)
                 DispatchQueue.main.async { [weak self] in
                     guard let self else { return }
-                    self.locations = response.results
+                    self.episodes = response.results
                     self.tableView.reloadData()
                     self.view.bringSubviewToFront(self.tableView)
                 }
@@ -59,12 +59,12 @@ final class LocationsVC: UIViewController {
         view.addSubview(tableView)
         
         tableView.frame = view.bounds
-        tableView.rowHeight = 100
+        tableView.rowHeight = 120
         
         tableView.dataSource = self
 //        tableView.delegate = self
         
-        tableView.register(LocationCell.self, forCellReuseIdentifier: LocationCell.reuseId)
+        tableView.register(EpisodeCell.self, forCellReuseIdentifier: EpisodeCell.reuseId)
     }
 
     private func setupViewController() {
@@ -74,15 +74,15 @@ final class LocationsVC: UIViewController {
 }
 
 // MARK: TableView Data Source methods
-extension LocationsVC: UITableViewDataSource {
+extension EpisodesVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        locations.count
+        episodes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: LocationCell.reuseId) as! LocationCell
-        let location = locations[indexPath.row]
-        cell.set(location: location)
+        let cell = tableView.dequeueReusableCell(withIdentifier: EpisodeCell.reuseId) as! EpisodeCell
+        let episode = episodes[indexPath.row]
+        cell.set(episode: episode)
         return cell
     }
     

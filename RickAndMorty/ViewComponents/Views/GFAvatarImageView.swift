@@ -10,7 +10,7 @@ import UIKit
 
 class GFAvatarImageView: UIImageView {
     
-    let placeholderImage = UIImage(named: "person")
+    let placeholderImage = UIImage(systemName: "person")
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,7 +30,7 @@ class GFAvatarImageView: UIImageView {
         
     func downloadImage(fromURL urlString: String) {
         guard let url = URL(string: urlString) else { return }
-        sd_setImage(with: url, placeholderImage:placeholderImage)
+        sd_setImage(with: url, placeholderImage: placeholderImage)
     }
     
 }

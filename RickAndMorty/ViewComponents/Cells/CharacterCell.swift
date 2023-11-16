@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CharacterCell: UICollectionViewCell {
+final class CharacterCell: UICollectionViewCell {
     static let reuseId = "CharacterCell"
     private let avatarImage = GFAvatarImageView(frame: .zero)
     private let titleLabel = GFTitleLabel(textAlignment: .left, fontSize: 16)
@@ -16,7 +16,8 @@ class CharacterCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.borderWidth = 0.5
-        layer.borderColor = UIColor.systemRed.cgColor
+        layer.borderColor = UIColor.systemGray3.cgColor
+        layer.cornerRadius = 5
         configureImageAndTitle()
     }
     
