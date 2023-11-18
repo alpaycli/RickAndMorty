@@ -9,7 +9,7 @@ import UIKit
 
 class RMTabBarController: UITabBarController {
 
-    private let manager = NetworkManager()
+//    private let manager = NetworkManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +18,7 @@ class RMTabBarController: UITabBarController {
     }
 
     func createCharactersVC() -> UINavigationController {
-        let viewModel = CharactersViewModel(manager: manager)
+        let viewModel = CharactersViewModel()
         
         let charactersVC = CharactersVC(viewModel: viewModel)
         charactersVC.title = "Characters"
@@ -28,7 +28,7 @@ class RMTabBarController: UITabBarController {
     }
 
     func createLocationsVC() -> UINavigationController {
-        let locationsVC = LocationsVC(manager: manager)
+        let locationsVC = LocationsVC()
         locationsVC.title = "Locations"
         locationsVC.tabBarItem = UITabBarItem(title: "Locations", image: .init(systemName: "map"), tag: 0)
         
@@ -36,7 +36,7 @@ class RMTabBarController: UITabBarController {
     }
     
     func createEpisodesVC() -> UINavigationController {
-        let episodesVC = EpisodesVC(manager: manager)
+        let episodesVC = EpisodesVC()
         episodesVC.title = "Episodes"
         episodesVC.tabBarItem = UITabBarItem(title: "Episodes", image: .init(systemName: "tv"), tag: 0)
         

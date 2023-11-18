@@ -14,47 +14,37 @@ final class EpisodesVC: UIViewController {
     
     private let tableView = UITableView()
     
-    private let manager: NetworkManager
-    
-    init(manager: NetworkManager) {
-        self.manager = manager
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewController()
         configureTableView()
-        getAllCharacters(page: page)
+        getAllEpisodes(page: page)
     }
     
-    func getAllCharacters(page: Int) {
-        guard let url = URL(string: manager.baseURL + "episode/?page=\(page)") else { return }
-        let request = URLRequest(url: url)
-        
-        manager.fetch(RMEpisodeResponse.self, urlRequest: request) { result in
-            
+    private func getAllEpisodes(page: Int) {
+        let request: Request<RMEpisodeResponse> = .getAllEpisodes(forPage: page)
+        URLSession.shared.decode(request) { result in
             switch result {
-            case .success(let response):
-                print(response.results.count)
-                DispatchQueue.main.async { [weak self] in
-                    guard let self else { return }
-                    self.episodes = response.results
-                    self.tableView.reloadData()
-                    self.view.bringSubviewToFront(self.tableView)
-                }
-            case .failure(let error):
-                print("Error:", error)
-                // MARK: Show Alert OR Empty State view.
+            case .success(let response): self.handleSuccessResponse(with: response)
+            case .failure(let error): self.handleFailureResult(with: error)
             }
         }
     }
-
     
+    private func handleSuccessResponse(with response: RMEpisodeResponse) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.episodes = response.results
+            self.tableView.reloadData()
+            self.view.bringSubviewToFront(self.tableView)
+        }
+    }
+    
+    private func handleFailureResult(with error: APIError) {
+        print("Error:", error)
+        // MARK: Show Alert OR Empty State view.
+    }
+
     private func configureTableView() {
         view.addSubview(tableView)
         

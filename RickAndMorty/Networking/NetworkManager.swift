@@ -21,6 +21,8 @@ class NetworkManagerr {
 import Foundation
 
 class NetworkManager {
+    static let shared = NetworkManager()
+    private init() { }
     let baseURL: String = "https://rickandmortyapi.com/api/"
 }
 

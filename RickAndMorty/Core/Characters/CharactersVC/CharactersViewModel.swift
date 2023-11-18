@@ -11,35 +11,32 @@ protocol CharacterViewModelOutput: AnyObject {
     func updateView()
 }
 
+
 final class CharactersViewModel {
     
     var characters: [RMCharacter] = []
     weak var output: CharacterViewModelOutput?
     
-    private let manager: NetworkManager
-    
-    init(manager: NetworkManager) {
-        self.manager = manager
-    }
-    
     func getAllCharacters(page: Int) {
-        guard let url = URL(string: manager.baseURL + "character/?page=\(page)") else { return }
-        let request = URLRequest(url: url)
-        
-        manager.fetch(RMCharacterResponse.self, urlRequest: request) { result in
-            
+        let request: Request<RMCharacterResponse> = .getAllCharacters(forPage: page)
+        URLSession.shared.decode(request) { result in
             switch result {
-            case .success(let response):
-                print(response.results.count)
-                DispatchQueue.main.async { [weak self] in
-                    guard let self else { return }
-                    self.characters = response.results
-                    self.output?.updateView()
-                }
-            case .failure(let error):
-                print("Error:", error)
-                // MARK: Show Alert OR Empty State view.
+            case .success(let response): self.handleSuccessResult(with: response)
+            case .failure(let error): self.handleFailureResult(with: error)
             }
         }
+    }
+    
+    private func handleSuccessResult(with response: RMCharacterResponse) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.characters = response.results
+            self.output?.updateView()
+        }
+    }
+    
+    private func handleFailureResult(with error: APIError) {
+        print("Error:", error.description)
+        // MARK: Show Alert OR Empty State view.
     }
 }
