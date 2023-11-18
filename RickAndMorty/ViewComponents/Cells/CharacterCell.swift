@@ -26,11 +26,18 @@ final class CharacterCell: UICollectionViewCell {
     }
     
     func set(character: RMCharacter) {
-        titleLabel.text = character.name
         if let imageURL = character.image {
             avatarImage.downloadImage(fromURL: imageURL)
         }
-        secondTitleLabel.text = character.status
+        titleLabel.text = character.name
+        switch character.status {
+        case "Alive":
+            secondTitleLabel.text = "🟢 Alive"
+        case "Dead":
+            secondTitleLabel.text = "🔴 Dead"
+        default:
+            secondTitleLabel.text = "❓ Unknown"
+        }
     }
     
     private func configureImageAndTitle() {

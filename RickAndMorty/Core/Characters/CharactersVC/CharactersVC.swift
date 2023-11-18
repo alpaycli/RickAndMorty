@@ -41,6 +41,7 @@ final class CharactersVC: UIViewController {
 
         collectionView.register(CharacterCell.self, forCellWithReuseIdentifier: CharacterCell.reuseId)
         collectionView.dataSource = self
+        collectionView.delegate = self
     }
      
     private func setupViewController() {
@@ -62,6 +63,15 @@ extension CharactersVC: UICollectionViewDataSource {
         cell.set(character: character)
         
         return cell
+    }
+}
+
+extension CharactersVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let character = viewModel.characters[indexPath.item]
+        let destinationVC = CharacterDetailVC(character: character)
+        
+        navigationController?.pushViewController(destinationVC, animated: true)
     }
 }
 

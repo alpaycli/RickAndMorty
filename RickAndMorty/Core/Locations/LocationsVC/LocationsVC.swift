@@ -5,6 +5,7 @@
 //  Created by Alpay Calalli on 15.11.23.
 //
 
+import SwiftUI
 import UIKit
 
 final class LocationsVC: UIViewController {
@@ -62,7 +63,7 @@ final class LocationsVC: UIViewController {
         tableView.rowHeight = 100
         
         tableView.dataSource = self
-//        tableView.delegate = self
+        tableView.delegate = self
         
         tableView.register(LocationCell.self, forCellReuseIdentifier: LocationCell.reuseId)
     }
@@ -85,6 +86,10 @@ extension LocationsVC: UITableViewDataSource {
         cell.set(location: location)
         return cell
     }
-    
-    
+}
+
+extension LocationsVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 }
