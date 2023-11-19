@@ -27,7 +27,7 @@ class NetworkManager {
 }
 
 extension NetworkManager {
-    // MARK: Generic Network Layer - Result type, completion handlers
+    // MARK: Generic Network Layer - Result type, completion handlers and async/await
     func fetch<T: Decodable>(_ type: T.Type, urlRequest: URLRequest?, completion: @escaping(Result<T, APIError>) -> Void) {
         
         guard let urlRequest else {
@@ -56,6 +56,29 @@ extension NetworkManager {
             
         }
         task.resume()
+    }
+    
+    func fetch<T: Decodable>(_ type: T.Type, url: URLRequest) async throws -> T {
+        
+        let (data, response) = try await URLSession.shared.data(for: url)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw APIError.badResponse(statusCode: response.hash)
+        }
+        
+        guard (200...299).contains(httpResponse.statusCode) else {
+            throw APIError.badResponse(statusCode: httpResponse.statusCode)
+        }
+        
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        do {
+            let decodedItems = try decoder.decode(type, from: data)
+            return decodedItems
+        } catch {
+            throw APIError.parsing(error as? DecodingError)
+        }
     }
 }
 

@@ -8,9 +8,9 @@
 import SDWebImage
 import UIKit
 
-class GFAvatarImageView: UIImageView {
+final class GFAvatarImageView: UIImageView {
     
-    let placeholderImage = UIImage(systemName: "person")
+    private let placeholderImage = UIImage(systemName: "person")
 
     override init(frame: CGRect) {
         super.init(frame: frame)

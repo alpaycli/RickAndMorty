@@ -55,15 +55,14 @@ extension Request {
         return request
     }
 }
+
 extension URLSession {
     func decode<Value: Decodable>(
         _ request: Request<Value>,
         using decoder: JSONDecoder = .init()
     ) async throws -> Value {
         let decoded = Task.detached(priority: .userInitiated) {
-            let (data, _) = try await self.data(for: request.urlRequest)
-            try Task.checkCancellation()
-            return try decoder.decode(Value.self, from: data)
+            return try await NetworkManager.shared.fetch(Value.self, url: request.urlRequest)
         }
         return try await decoded.value
     }

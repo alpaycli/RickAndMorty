@@ -67,6 +67,19 @@ extension CharactersVC: UICollectionViewDataSource {
 }
 
 extension CharactersVC: UICollectionViewDelegate {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        let scrollY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let screenHeight = scrollView.frame.size.height
+        
+        if scrollY > contentHeight - screenHeight {
+            guard viewModel.hasMoreCharacters, !viewModel.isLoadingCharacters else { return }
+            page += 1
+            viewModel.getAllCharacters(page: page)
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let character = viewModel.characters[indexPath.item]
         let destinationVC = CharacterDetailVC(character: character)
