@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CharacterViewModelOutput: AnyObject {
-    func updateView()
+    func updateView(with characters: [RMCharacter])
 }
 
 
@@ -37,7 +37,7 @@ final class CharactersViewModel {
             guard let self else { return }
             if response.results.count < 20 { hasMoreCharacters = false }
             self.characters.append(contentsOf: response.results)
-            self.output?.updateView()
+            self.output?.updateView(with: characters)
         }
     }
     

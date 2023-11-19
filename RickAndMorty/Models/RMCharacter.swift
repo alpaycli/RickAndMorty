@@ -11,18 +11,18 @@ struct RMCharacterResponse: Codable {
     let results: [RMCharacter]
 }
 
-struct RMCharacter: Codable, Identifiable {
+struct RMCharacter: Codable, Identifiable, Hashable {
     let id: Int?
     let name, status, species, type, gender, image, url, created: String?
     let orign: Orign?
     let location: Location?
     let episode: [String]?
     
-    struct Orign: Codable {
+    struct Orign: Codable, Hashable {
         let name, url: String
     }
 
-    struct Location: Codable {
+    struct Location: Codable, Hashable {
         let name, url: String
     }
 }

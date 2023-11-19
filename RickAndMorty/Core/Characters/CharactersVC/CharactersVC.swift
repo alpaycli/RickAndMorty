@@ -12,7 +12,12 @@ import UIKit
 
 final class CharactersVC: UIViewController {
     
+    private enum Section {
+        case main
+    }
+    
     private var collectionView: UICollectionView!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, RMCharacter>?
     
     private var page: Int = 1
     
@@ -32,6 +37,7 @@ final class CharactersVC: UIViewController {
         super.viewDidLoad()
         setupViewController()
         configureCollectionView()
+        configureDataSource()
         viewModel.getAllCharacters(page: page)
     }
     
@@ -40,8 +46,26 @@ final class CharactersVC: UIViewController {
         view.addSubview(collectionView)
 
         collectionView.register(CharacterCell.self, forCellWithReuseIdentifier: CharacterCell.reuseId)
-        collectionView.dataSource = self
         collectionView.delegate = self
+    }
+    
+    private func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, RMCharacter>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, character) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCell.reuseId, for: indexPath) as! CharacterCell
+            cell.set(character: character)
+            return cell
+        })
+    }
+    
+    private func updateData(_ data: [RMCharacter]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, RMCharacter>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(data)
+        
+        guard let dataSource else { return }
+        DispatchQueue.main.async {
+            dataSource.apply(snapshot, animatingDifferences: true)
+        }
     }
      
     private func setupViewController() {
@@ -50,25 +74,9 @@ final class CharactersVC: UIViewController {
     }
 }
 
-// MARK: CollectionView Data Source methods
-extension CharactersVC: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.characters.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCell.reuseId, for: indexPath) as! CharacterCell
-        let character = viewModel.characters[indexPath.row]
-        cell.set(character: character)
-        
-        return cell
-    }
-}
-
+// MARK: CollectionView Delegate methods
 extension CharactersVC: UICollectionViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        
         let scrollY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         let screenHeight = scrollView.frame.size.height
@@ -89,8 +97,8 @@ extension CharactersVC: UICollectionViewDelegate {
 }
 
 extension CharactersVC: CharacterViewModelOutput {
-    func updateView() {
-        DispatchQueue.main.async { self.collectionView.reloadData() }
+    func updateView(with characters: [RMCharacter]) {
+        updateData(characters)
     }
 }
 
