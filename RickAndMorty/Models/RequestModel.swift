@@ -90,6 +90,15 @@ extension Request where Response == RMCharacterResponse {
             )
         )
     }
+    
+    static func getFilteredCharacters(query: String) -> Self {
+        Request(url: URL(string: "https://rickandmortyapi.com/api/character")!,
+                method: .get(
+                    [.init(name: "name", value: query)]
+            )
+        )
+    }
+    
 }
 
 extension Request where Response == RMLocationResponse {

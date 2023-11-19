@@ -20,7 +20,7 @@ final class CharactersVC: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, RMCharacter>?
     
     private var page: Int = 1
-    
+        
     private let viewModel: CharactersViewModel
     
     init(viewModel: CharactersViewModel) {
@@ -36,9 +36,15 @@ final class CharactersVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewController()
+        configureSearchBar()
         configureCollectionView()
         configureDataSource()
         viewModel.getAllCharacters(page: page)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     private func configureCollectionView() {
@@ -67,7 +73,14 @@ final class CharactersVC: UIViewController {
             dataSource.apply(snapshot, animatingDifferences: true)
         }
     }
-     
+    
+    private func configureSearchBar() {
+        let searchController = UISearchController()
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "Search for a character"
+        navigationItem.searchController = searchController
+    }
+    
     private func setupViewController() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -89,12 +102,21 @@ extension CharactersVC: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let character = viewModel.characters[indexPath.item]
+        let characters = viewModel.isSearching ? viewModel.filteredCharacters : viewModel.characters
+        let character = characters[indexPath.item]
         let destinationVC = CharacterDetailVC(character: character)
         
         navigationController?.pushViewController(destinationVC, animated: true)
     }
 }
+
+// MARK: Searchable
+extension CharactersVC: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        viewModel.handleSearchResult(for: searchController)
+    }
+}
+
 
 extension CharactersVC: CharacterViewModelOutput {
     func updateView(with characters: [RMCharacter]) {
