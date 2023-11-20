@@ -18,9 +18,7 @@ final class CharactersVC: UIViewController {
     
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, RMCharacter>?
-    
-    private var page: Int = 1
-        
+            
     private let viewModel: CharactersViewModel
     
     init(viewModel: CharactersViewModel) {
@@ -39,7 +37,7 @@ final class CharactersVC: UIViewController {
         configureSearchBar()
         configureCollectionView()
         configureDataSource()
-        viewModel.getAllCharacters(page: page)
+        viewModel.getAllCharacters()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,23 +88,11 @@ final class CharactersVC: UIViewController {
 // MARK: CollectionView Delegate methods
 extension CharactersVC: UICollectionViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let scrollY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        let screenHeight = scrollView.frame.size.height
-        
-        if scrollY > contentHeight - screenHeight {
-            guard viewModel.hasMoreCharacters, !viewModel.isLoadingCharacters else { return }
-            page += 1
-            viewModel.getAllCharacters(page: page)
-        }
+        viewModel.handleScrollViewForPagination(scrollView)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let characters = viewModel.isSearching ? viewModel.filteredCharacters : viewModel.characters
-        let character = characters[indexPath.item]
-        let destinationVC = CharacterDetailVC(character: character)
-        
-        navigationController?.pushViewController(destinationVC, animated: true)
+        viewModel.segue(collectionView, didSelectItemAt: indexPath, navController: navigationController)
     }
 }
 
@@ -123,33 +109,3 @@ extension CharactersVC: CharacterViewModelOutput {
         updateData(characters)
     }
 }
-
-/*
- 
- //    var characters: [RMCharacter] = []
-     
- //    func getAllCharacters(page: Int) {
- //        guard let url = URL(string: NetworkManager.shared.baseURL + "character/?page=\(page)") else { return }
- //
- //        let request = URLRequest(url: url)
- //
- //        NetworkManager.shared.fetch(RMCharacterResponse.self, urlRequest: request) { result in
- //
- //            switch result {
- //            case .success(let response):
- //                print(response.results.count)
- //                DispatchQueue.main.async { [weak self] in
- //                    guard let self else { return }
- //                    self.characters = response.results
- //                    collectionView.reloadData()
- //                }
- //            case .failure(let error):
- //                print("Error:", error)
- //            }
- //
- //        }
- //
- //    }
-
- 
- */

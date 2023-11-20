@@ -5,19 +5,6 @@
 //  Created by Alpay Calalli on 14.11.23.
 //
 
-protocol NetworkSession { func fetch() }
-class RickAndMortyNetworkSession: NetworkSession { func fetch() {} }
-class NetworkManagerr {
-    let session: NetworkSession
-    init(session: NetworkSession = RickAndMortyNetworkSession()) {
-        self.session = session
-    }
-    
-    func fetchAllCharacters() {
-        session.fetch()
-    }
-}
-
 import Foundation
 
 class NetworkManager {

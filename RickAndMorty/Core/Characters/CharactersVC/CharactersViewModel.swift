@@ -12,18 +12,19 @@ protocol CharacterViewModelOutput: AnyObject {
 }
 
 final class CharactersViewModel {
-        
-    var isSearching = false
     
-    var hasMoreCharacters = true
-    var isLoadingCharacters = false
+    private var isSearching = false
+
+    private var page: Int = 1
+    private var hasMoreCharacters = true
+    private var isLoadingCharacters = false
     
-    var filteredCharacters: [RMCharacter] = []
-    var characters: [RMCharacter] = []
+    private var filteredCharacters: [RMCharacter] = []
+    private var characters: [RMCharacter] = []
     
     weak var output: CharacterViewModelOutput?
     
-    func getAllCharacters(page: Int) {
+    func getAllCharacters() {
         let request: Request<RMCharacterResponse> = .getAllCharacters(forPage: page)
         isLoadingCharacters = true
         URLSession.shared.decode(request) { result in
@@ -63,6 +64,26 @@ final class CharactersViewModel {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.getFilteredCharacters(query: searchText)
         }
+    }
+    
+    func handleScrollViewForPagination(_ scrollView: UIScrollView) {
+        let scrollY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let screenHeight = scrollView.frame.size.height
+        
+        if scrollY > contentHeight - screenHeight {
+            guard hasMoreCharacters, !isLoadingCharacters else { return }
+            page += 1
+            getAllCharacters()
+        }
+    }
+    
+    func segue(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath, navController: UINavigationController?) {
+        let characters = isSearching ? filteredCharacters : characters
+        let character = characters[indexPath.item]
+        let destinationVC = CharacterDetailVC(character: character)
+        
+        navController?.pushViewController(destinationVC, animated: true)
     }
     
     private func handleSuccessResult(with response: RMCharacterResponse) {
