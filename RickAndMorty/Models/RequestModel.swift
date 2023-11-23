@@ -98,7 +98,6 @@ extension Request where Response == RMCharacterResponse {
             )
         )
     }
-    
 }
 
 extension Request where Response == RMLocationResponse {
@@ -119,6 +118,15 @@ extension Request where Response == RMEpisodeResponse {
             method: .get(
                 [.init(name: "page", value: "\(page)")]
             )
+        )
+    }
+}
+
+extension Request where Response == RMCharacter {
+    static func getSingleCharacter(for urlString: String) -> Self {
+        Request(url: URL(string: urlString)!,
+                method: .get(
+                    [.init(name: "", value: nil)])
         )
     }
 }

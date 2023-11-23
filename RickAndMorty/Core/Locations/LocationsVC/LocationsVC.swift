@@ -81,6 +81,8 @@ extension LocationsVC: UITableViewDataSource {
 
 extension LocationsVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let destVC = LocationDetailVC()
         
+        navigationController?.pushViewController(destVC, animated: true)
     }
 }

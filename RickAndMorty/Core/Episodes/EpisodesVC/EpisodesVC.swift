@@ -52,7 +52,7 @@ final class EpisodesVC: UIViewController {
         tableView.rowHeight = 120
         
         tableView.dataSource = self
-//        tableView.delegate = self
+        tableView.delegate = self
         
         tableView.register(EpisodeCell.self, forCellReuseIdentifier: EpisodeCell.reuseId)
     }
@@ -75,6 +75,17 @@ extension EpisodesVC: UITableViewDataSource {
         cell.set(episode: episode)
         return cell
     }
-    
-    
+}
+
+extension EpisodesVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let episode = episodes[indexPath.row]
+        let destinationVC = EpisodeDetailVC(episode: episode)
+        
+        if let name = episode.name {
+            destinationVC.title = name
+        }
+        
+        navigationController?.pushViewController(destinationVC, animated: true)
+    }
 }
