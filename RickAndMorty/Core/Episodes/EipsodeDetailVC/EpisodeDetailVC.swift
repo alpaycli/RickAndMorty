@@ -101,8 +101,8 @@ final class EpisodeDetailVC: UIViewController {
         let episodeInfoVC = RMInfoView()
         let dateInfoVC = RMInfoView()
         
-        episodeInfoVC.set(itemType: .episode, withValue: episode.episode ?? "")
-        dateInfoVC.set(itemType: .airDate, withValue: episode.airDate ?? "")
+        episodeInfoVC.set(itemType: .episode, withValue: episode.episode ?? "N/A")
+        dateInfoVC.set(itemType: .airDate, withValue: episode.airDate ?? "N/A")
         
         self.add(childVC: episodeInfoVC, to: self.infoViewOne)
         self.add(childVC: dateInfoVC, to: self.infoViewTwo)

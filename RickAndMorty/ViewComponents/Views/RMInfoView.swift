@@ -8,7 +8,7 @@
 import UIKit
 
 enum InfoType {
-    case episode, airDate, type, dimension
+    case episode, airDate, locationType, dimension
 }
 
 class RMInfoView: UIViewController {
@@ -50,7 +50,7 @@ class RMInfoView: UIViewController {
         case .airDate:
             symbolImage.text = "📅"
             titleLabel.text = "Air Date"
-        case .type:
+        case .locationType:
             symbolImage.text = "🪐"
             titleLabel.text = "Type"
         case .dimension:
