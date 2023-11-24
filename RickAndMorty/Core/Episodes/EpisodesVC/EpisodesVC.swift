@@ -21,6 +21,11 @@ final class EpisodesVC: UIViewController {
         getAllEpisodes(page: page)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     private func getAllEpisodes(page: Int) {
         let request: Request<RMEpisodeResponse> = .getAllEpisodes(forPage: page)
         URLSession.shared.decode(request) { result in
@@ -59,7 +64,6 @@ final class EpisodesVC: UIViewController {
 
     private func setupViewController() {
         view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
 

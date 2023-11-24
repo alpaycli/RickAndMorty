@@ -42,7 +42,7 @@ final class CharactersVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func configureCollectionView() {
@@ -81,7 +81,6 @@ final class CharactersVC: UIViewController {
     
     private func setupViewController() {
         view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
 

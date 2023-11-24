@@ -22,6 +22,11 @@ final class LocationsVC: UIViewController {
         getAllCharacters(page: page)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     private func getAllCharacters(page: Int) {
         let request: Request<RMLocationResponse> = .getAllLocations(forPage: page)
         URLSession.shared.decode(request) { result in
@@ -61,7 +66,6 @@ final class LocationsVC: UIViewController {
     
     private func setupViewController() {
         view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
 

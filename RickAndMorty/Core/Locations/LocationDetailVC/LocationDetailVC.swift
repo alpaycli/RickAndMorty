@@ -37,6 +37,11 @@ final class LocationDetailVC: UIViewController {
         layoutUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     private func layoutUI() {
         view.addSubviews(CWTitleLabel, infoViewOne, infoViewTwo, charactersCollectionView)
         
@@ -117,7 +122,6 @@ final class LocationDetailVC: UIViewController {
 
     private func setupViewController() {
         view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
 
