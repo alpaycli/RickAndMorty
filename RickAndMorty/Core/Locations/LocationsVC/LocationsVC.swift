@@ -10,6 +10,8 @@ import UIKit
 
 final class LocationsVC: UIViewController {
     
+    private var hasMoreLocations = true
+    private var isLoadingLocations = false
     private var page = 1
     private var locations: [RMLocation] = []
     
@@ -19,7 +21,7 @@ final class LocationsVC: UIViewController {
         super.viewDidLoad()
         setupViewController()
         configureTableView()
-        getAllCharacters(page: page)
+        getAllLocations(page: page)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -27,20 +29,24 @@ final class LocationsVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    private func getAllCharacters(page: Int) {
+    private func getAllLocations(page: Int) {
         let request: Request<RMLocationResponse> = .getAllLocations(forPage: page)
-        URLSession.shared.decode(request) { result in
+        isLoadingLocations = true
+        URLSession.shared.decode(request) { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let response): self.handleSuccessResponse(with: response)
             case .failure(let error): self.handleFailureResult(with: error)
             }
+            self.isLoadingLocations = false
         }
     }
     
     private func handleSuccessResponse(with response: RMLocationResponse) {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-            self.locations = response.results
+            if response.results.count < 20 { hasMoreLocations = false }
+            self.locations.append(contentsOf: response.results)
             self.tableView.reloadData()
             self.view.bringSubviewToFront(self.tableView)
         }
@@ -84,6 +90,18 @@ extension LocationsVC: UITableViewDataSource {
 }
 
 extension LocationsVC: UITableViewDelegate {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let scrollY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let screenHeight = scrollView.frame.size.height
+        
+        if scrollY > contentHeight - screenHeight {
+            guard hasMoreLocations, !isLoadingLocations else { return }
+            page += 1
+            getAllLocations(page: page)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let location = locations[indexPath.row]
         let destVC = LocationDetailVC(location: location)

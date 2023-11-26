@@ -8,8 +8,6 @@
 import UIKit
 
 class RMTabBarController: UITabBarController {
-
-//    private let manager = NetworkManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()

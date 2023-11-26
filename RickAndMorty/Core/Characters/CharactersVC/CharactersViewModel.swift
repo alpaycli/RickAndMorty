@@ -27,7 +27,8 @@ final class CharactersViewModel {
     func getAllCharacters() {
         let request: Request<RMCharacterResponse> = .getAllCharacters(forPage: page)
         isLoadingCharacters = true
-        URLSession.shared.decode(request) { result in
+        URLSession.shared.decode(request) { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let response): self.handleSuccessResult(with: response)
             case .failure(let error): self.handleFailureResult(with: error)
@@ -39,13 +40,13 @@ final class CharactersViewModel {
     func getFilteredCharacters(query: String) {
         let request: Request<RMCharacterResponse> = .getFilteredCharacters(query: query)
         isLoadingCharacters = true
-        URLSession.shared.decode(request) { result in
+        URLSession.shared.decode(request) { [weak self] result in
+            guard let self else { return }
             switch result {
-            case .success(let response): DispatchQueue.main.async { [weak self] in
-                    guard let self else { return }
-                    self.filteredCharacters = response.results
-                    output?.updateView(with: filteredCharacters)
-                }
+            case .success(let response): DispatchQueue.main.async {
+                self.filteredCharacters = response.results
+                self.output?.updateView(with: self.filteredCharacters)
+            }
             case .failure(let error): self.handleFailureResult(with: error)
             }
             self.isLoadingCharacters = false
@@ -87,11 +88,10 @@ final class CharactersViewModel {
     }
     
     private func handleSuccessResult(with response: RMCharacterResponse) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
-            if response.results.count < 20 { hasMoreCharacters = false }
+        DispatchQueue.main.async {
+            if response.results.count < 20 { self.hasMoreCharacters = false }
             self.characters.append(contentsOf: response.results)
-            self.output?.updateView(with: characters)
+            self.output?.updateView(with: self.characters)
         }
     }
     

@@ -9,6 +9,8 @@ import UIKit
 
 final class EpisodesVC: UIViewController {
     
+    private var hasMoreEpisodes = true
+    private var isLoadingEpisodes = false
     private var page = 1
     private var episodes: [RMEpisode] = []
     
@@ -28,17 +30,21 @@ final class EpisodesVC: UIViewController {
     
     private func getAllEpisodes(page: Int) {
         let request: Request<RMEpisodeResponse> = .getAllEpisodes(forPage: page)
-        URLSession.shared.decode(request) { result in
+        isLoadingEpisodes = true
+        URLSession.shared.decode(request) { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let response): self.handleSuccessResponse(with: response)
             case .failure(let error): self.handleFailureResult(with: error)
             }
+            self.isLoadingEpisodes = false
         }
     }
     
     private func handleSuccessResponse(with response: RMEpisodeResponse) {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
+            if response.results.count < 20 { hasMoreEpisodes = false }
             self.episodes = response.results
             self.tableView.reloadData()
             self.view.bringSubviewToFront(self.tableView)
@@ -82,6 +88,18 @@ extension EpisodesVC: UITableViewDataSource {
 }
 
 extension EpisodesVC: UITableViewDelegate {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let scrollY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let screenHeight = scrollView.frame.size.height
+        
+        if scrollY > contentHeight - screenHeight {
+            guard hasMoreEpisodes, !isLoadingEpisodes else { return }
+            page += 1
+            getAllEpisodes(page: page)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let episode = episodes[indexPath.row]
         let destinationVC = EpisodeDetailVC(episode: episode)
